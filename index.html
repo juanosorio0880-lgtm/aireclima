@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0f1a">
+  <meta name="description" content="Guía educativa, gratuita e independiente sobre el cuidado y mantenimiento doméstico de aires acondicionados.">
+  <title>Cuidado de Aires Acondicionados | Guía educativa</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080d17;
+      --surface: #101827;
+      --surface-raised: #162238;
+      --text: #edf3ff;
+      --muted: #a4b1c5;
+      --subtle: #8290a7;
+      --blue: #3b82f6;
+      --indigo: #6366f1;
+      --line: rgba(165, 187, 222, .16);
+      --green: #67d9a1;
+      --amber: #f3c66d;
+      --radius: 18px;
+      --content: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 82% 0%, rgba(37, 99, 235, .2), transparent 34rem),
+        radial-gradient(ellipse at 0% 50%, rgba(30, 64, 175, .13), transparent 34rem),
+        linear-gradient(145deg, #080d17 0%, #0b1424 54%, #080d17 100%);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    body::before {
+      content: ""; position: fixed; inset: -15%; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 20% 35%, rgba(103, 158, 255, .14), transparent 29%),
+        radial-gradient(ellipse at 74% 21%, rgba(75, 120, 210, .12), transparent 25%),
+        radial-gradient(ellipse at 65% 78%, rgba(141, 177, 235, .1), transparent 30%);
+      filter: blur(35px); opacity: .8; animation: ambient-smoke 24s ease-in-out infinite alternate;
+    }
+    .site-header, main, .site-footer { position: relative; z-index: 1; }
+    @keyframes ambient-smoke {
+      from { transform: translate3d(-1.5%, 0, 0) scale(1); }
+      to { transform: translate3d(1.5%, -1%, 0) scale(1.04); }
+    }
+    a { color: #9dc2ff; text-underline-offset: 3px; }
+    a:hover { color: #c4d9ff; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    :focus-visible { outline: 3px solid #8bb6ff; outline-offset: 4px; }
+    .skip-link {
+      position: fixed; top: 10px; left: 10px; z-index: 20;
+      transform: translateY(-160%); padding: 10px 14px; border-radius: 8px;
+      background: white; color: #101827;
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .container { width: min(var(--content), calc(100% - 40px)); margin-inline: auto; }
+    .mono { font-family: "JetBrains Mono", Consolas, monospace; }
+    .site-header {
+      position: sticky; top: 0; z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(8, 13, 23, .88);
+      backdrop-filter: blur(18px);
+    }
+    .header-inner {
+      min-height: 76px; display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; }
+    .brand-mark {
+      width: 42px; height: 42px; display: grid; place-items: center;
+      border: 1px solid rgba(147, 183, 255, .4); border-radius: 50%;
+      background: linear-gradient(145deg, rgba(59, 130, 246, .28), rgba(99, 102, 241, .19));
+      color: #dce9ff; font: 700 13px "JetBrains Mono", Consolas, monospace;
+    }
+    .brand-name { font: 600 14px/1.3 "Space Grotesk", Inter, sans-serif; letter-spacing: -.02em; }
+    .brand-caption { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; font-weight: 400; }
+    .nav-list { display: flex; align-items: center; gap: 5px; padding: 0; margin: 0; list-style: none; }
+    .nav-link {
+      display: inline-flex; padding: 9px 12px; border-radius: 9px;
+      color: var(--muted); font-size: 13px; font-weight: 550; text-decoration: none;
+      transition: background .2s ease, color .2s ease;
+    }
+    .nav-link:hover, .nav-link[aria-current="page"] { color: var(--text); background: rgba(130, 159, 207, .1); }
+    .menu-toggle {
+      display: none; width: 42px; height: 42px; border: 1px solid var(--line);
+      border-radius: 10px; background: var(--surface); color: var(--text); cursor: pointer;
+    }
+    main { min-height: 65vh; }
+    .page { display: none; padding: 76px 0 96px; }
+    .page.active { display: block; animation: appear .35s ease both; }
+    @keyframes appear { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+    .hero { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 54px; padding: 28px 0 64px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px; margin: 0 0 20px;
+      color: #a8c8ff; font: 600 11px "JetBrains Mono", Consolas, monospace;
+      letter-spacing: .07em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 20px; height: 1px; background: var(--blue); }
+    h1, h2, h3 { font-family: "Space Grotesk", Inter, sans-serif; letter-spacing: -.035em; line-height: 1.2; }
+    h1 { max-width: 720px; margin: 0; font-size: clamp(2.65rem, 6vw, 4.65rem); }
+    h1 span { color: #83b1ff; }
+    h2 { margin: 0 0 18px; font-size: clamp(1.7rem, 3vw, 2.45rem); }
+    h3 { margin: 0 0 10px; font-size: 1.18rem; }
+    p { margin: 0 0 15px; color: var(--muted); }
+    .lead { max-width: 630px; margin-top: 22px; font-size: 1.08rem; line-height: 1.8; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px;
+      border: 1px solid rgba(103, 217, 161, .28); border-radius: 999px;
+      background: rgba(103, 217, 161, .07); color: #a9edca; font-size: 12px;
+    }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px rgba(103,217,161,.55); }
+    .hero-visual {
+      position: relative; min-height: 330px; overflow: hidden; display: grid; place-items: center;
+      border: 1px solid var(--line); border-radius: 28px;
+      background: linear-gradient(145deg, rgba(22, 38, 63, .94), rgba(15, 23, 38, .82));
+      box-shadow: 0 28px 90px rgba(0, 0, 0, .28);
+    }
+    .hero-visual::before, .hero-visual::after {
+      content: ""; position: absolute; width: 78%; height: 58%;
+      border-radius: 50%; background: rgba(80, 128, 205, .23);
+      filter: blur(30px); animation: unit-smoke 7s ease-in-out infinite alternate;
+    }
+    .hero-visual::before { left: -9%; top: 9%; }
+    .hero-visual::after { width: 70%; height: 52%; right: -8%; bottom: 8%; background: rgba(112, 153, 217, .2); animation-delay: -3.5s; }
+    @keyframes unit-smoke {
+      from { opacity: .48; transform: translate3d(-9px, 8px, 0) scale(.92); }
+      to { opacity: .9; transform: translate3d(12px, -10px, 0) scale(1.08); }
+    }
+    .air-unit {
+      position: relative; z-index: 1; width: 68%; height: 105px; padding: 20px;
+      border: 1px solid rgba(194, 214, 249, .38); border-radius: 13px;
+      background: linear-gradient(180deg, #dce8f8, #aabbd2);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, .3);
+    }
+    .air-unit::before {
+      content: ""; display: block; height: 10px; margin-top: 36px;
+      border-radius: 2px 2px 8px 8px; background: linear-gradient(180deg, #7286a2, #c0cede);
+    }
+    .air-light { position: absolute; right: 21px; top: 19px; width: 5px; height: 5px; border-radius: 50%; background: #4b9dff; box-shadow: 0 0 10px #4b9dff; }
+    .airflow { position: absolute; top: calc(50% + 24px); left: 50%; display: flex; gap: 17px; transform: translateX(-50%); }
+    .airflow i {
+      width: 2px; height: 65px; border-radius: 50%;
+      background: linear-gradient(rgba(94, 143, 222, .72), rgba(94, 143, 222, .16) 58%, transparent);
+      filter: blur(.35px); animation: air-drift 2.8s ease-in-out infinite;
+    }
+    .airflow i:nth-child(2) { animation-delay: -.6s; }
+    .airflow i:nth-child(3) { animation-delay: -1.2s; }
+    .airflow i:nth-child(4) { animation-delay: -1.8s; }
+    .airflow i:nth-child(5) { animation-delay: -2.4s; }
+    @keyframes air-drift {
+      0%, 100% { opacity: .25; transform: translate3d(0, -7px, 0) scaleY(.78) skewX(-5deg); }
+      50% { opacity: .9; transform: translate3d(3px, 8px, 0) scaleY(1.08) skewX(5deg); }
+    }
+    .visual-label { position: absolute; bottom: 20px; left: 22px; color: #9eacc2; font: 10px "JetBrains Mono", Consolas, monospace; letter-spacing: .08em; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 5px 0 82px; }
+    .stat {
+      padding: 19px 20px; border: 1px solid var(--line); border-radius: 14px;
+      background: rgba(17, 26, 42, .78);
+    }
+    .stat strong { display: block; margin-bottom: 4px; color: #dce9ff; font: 600 23px "Space Grotesk", Inter, sans-serif; }
+    .stat span { color: var(--muted); font-size: 12px; }
+    .section-heading { max-width: 700px; margin-bottom: 28px; }
+    .section-heading p { max-width: 620px; }
+    .section-block { margin-top: 78px; }
+    .grid-2, .grid-3, .grid-4 { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .card {
+      padding: 24px; border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(22, 33, 52, .9), rgba(14, 22, 36, .92));
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .card:hover { transform: translateY(-3px); border-color: rgba(118, 163, 240, .35); background-color: var(--surface-raised); }
+    .card p:last-child { margin-bottom: 0; }
+    .card-icon {
+      width: 40px; height: 40px; display: grid; place-items: center; margin-bottom: 17px;
+      border: 1px solid rgba(59, 130, 246, .22); border-radius: 12px;
+      background: rgba(59, 130, 246, .1); color: #9dc2ff;
+      font: 600 12px "JetBrains Mono", Consolas, monospace;
+    }
+    .card-kicker { margin-bottom: 8px; color: #8fb7ff; font: 10px "JetBrains Mono", Consolas, monospace; letter-spacing: .09em; text-transform: uppercase; }
+    .info-box, .warning-box, .responsible-box {
+      display: flex; gap: 16px; padding: 20px 22px; border-radius: 14px;
+    }
+    .info-box { border: 1px solid rgba(83, 147, 247, .24); background: rgba(59, 130, 246, .075); }
+    .warning-box { border: 1px solid rgba(243, 198, 109, .26); background: rgba(243, 198, 109, .07); }
+    .responsible-box { border: 1px solid rgba(103, 217, 161, .22); background: rgba(103, 217, 161, .055); }
+    .box-icon { flex: 0 0 auto; color: #9dc2ff; font: 600 13px "JetBrains Mono", Consolas, monospace; }
+    .warning-box .box-icon { color: var(--amber); }
+    .responsible-box .box-icon { color: var(--green); }
+    .info-box p, .warning-box p, .responsible-box p { margin: 0; font-size: 14px; }
+    .notice-stack { display: grid; gap: 12px; margin-top: 22px; }
+    .numbered-list { display: grid; gap: 13px; padding: 0; margin: 0; list-style: none; counter-reset: steps; }
+    .numbered-list li { position: relative; min-height: 50px; padding: 10px 12px 10px 56px; color: var(--muted); counter-increment: steps; }
+    .numbered-list li::before {
+      content: counter(steps, decimal-leading-zero); position: absolute; top: 8px; left: 0;
+      color: #90b8ff; font: 12px "JetBrains Mono", Consolas, monospace;
+    }
+    .content-page { max-width: 850px; margin-inline: auto; }
+    .content-page .page-intro { margin: 17px 0 34px; font-size: 1.08rem; }
+    .prose-section { padding: 24px 0; border-top: 1px solid var(--line); }
+    .prose-section h2 { margin-bottom: 13px; font-size: 1.35rem; }
+    .prose-section p:last-child, .prose-section ul:last-child { margin-bottom: 0; }
+    .prose-section ul { padding-left: 21px; color: var(--muted); }
+    .prose-section li { padding: 3px 0; }
+    .contact-card { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 26px; padding: 22px; }
+    .contact-item { min-width: 0; }
+    .contact-label { display: block; margin-bottom: 4px; color: var(--subtle); font: 10px "JetBrains Mono", Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .contact-value { color: var(--text); font-size: 14px; overflow-wrap: anywhere; }
+    .contact-value a { color: #b7d1ff; }
+    .site-footer { padding: 44px 0 26px; border-top: 1px solid var(--line); background: rgba(8, 12, 21, .72); }
+    .footer-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; }
+    .footer-title { margin-bottom: 12px; color: var(--text); font: 600 15px "Space Grotesk", Inter, sans-serif; }
+    .footer-copy { max-width: 430px; font-size: 13px; }
+    .footer-contact { display: grid; gap: 6px; color: var(--muted); font-size: 12px; }
+    .footer-contact strong { color: #dbe6f8; font-weight: 550; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 15px; margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--subtle); font-size: 11px; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr .75fr; gap: 25px; }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .nav-link { padding-inline: 8px; font-size: 12px; }
+    }
+    @media (max-width: 720px) {
+      .container { width: min(var(--content), calc(100% - 32px)); }
+      .header-inner { min-height: 68px; }
+      .menu-toggle { display: inline-grid; place-items: center; }
+      .nav-list {
+        position: absolute; top: calc(100% + 1px); left: 0; right: 0; display: none;
+        align-items: stretch; padding: 10px 16px 16px; border-bottom: 1px solid var(--line);
+        background: rgba(10, 15, 26, .98);
+      }
+      .nav-list.open { display: grid; }
+      .nav-link { padding: 11px 12px; font-size: 14px; }
+      .hero { grid-template-columns: 1fr; padding-top: 20px; }
+      .hero-visual { min-height: 255px; }
+      .air-unit { width: min(68%, 330px); }
+      .page { padding: 52px 0 70px; }
+      .stats { grid-template-columns: repeat(2, 1fr); margin-bottom: 60px; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .section-block { margin-top: 60px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 26px; }
+      .footer-bottom { flex-direction: column; }
+    }
+    @media (max-width: 430px) {
+      h1 { font-size: 2.45rem; }
+      .grid-4, .contact-card { grid-template-columns: 1fr; }
+      .stat { padding: 16px; }
+      .stat strong { font-size: 20px; }
+      .card { padding: 21px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" aria-label="DS, inicio — Dixon Jamelly Rolon Leal">
+        <span class="brand-mark" aria-hidden="true">DS</span>
+        <span class="brand-name">Dixon Jamelly Rolon Leal<span class="brand-caption">Guía de climatización</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navegacion" aria-label="Abrir menú">
+        <span aria-hidden="true">☰</span>
+      </button>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-list" id="navegacion">
+          <li><a class="nav-link" href="#inicio">Inicio</a></li>
+          <li><a class="nav-link" href="#sobre-nosotros">Sobre Nosotros</a></li>
+          <li><a class="nav-link" href="#mision-vision">Misión y Visión</a></li>
+          <li><a class="nav-link" href="#politicas">Políticas y Privacidad</a></li>
+          <li><a class="nav-link" href="#terminos">Términos y Condiciones</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="page" id="inicio" aria-labelledby="inicio-titulo">
+      <div class="container">
+        <div class="hero">
+          <div>
+            <p class="eyebrow">Guía práctica para el hogar</p>
+            <span class="badge"><span class="badge-dot" aria-hidden="true"></span>Sitio educativo · Sin fines comerciales</span>
+            <h1 id="inicio-titulo">Cuidado y Mantenimiento de <span>Aires Acondicionados</span></h1>
+            <p class="lead">Información clara para comprender el funcionamiento básico, el cuidado preventivo y el uso responsable de equipos de aire acondicionado en casa.</p>
+          </div>
+          <div class="hero-visual" role="img" aria-label="Ilustración esquemática de una unidad de aire acondicionado de pared">
+            <div class="air-unit"><span class="air-light"></span></div>
+            <div class="airflow" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            <span class="visual-label">CLIMATIZACIÓN DOMÉSTICA / GUÍA 01</span>
+          </div>
+        </div>
+
+        <div class="stats" aria-label="Datos orientativos">
+          <div class="stat"><strong>03</strong><span>Tipos principales de equipo</span></div>
+          <div class="stat"><strong>30 días</strong><span>Referencia para revisar el filtro</span></div>
+          <div class="stat"><strong>06 meses</strong><span>Referencia de mantenimiento preventivo</span></div>
+          <div class="stat"><strong>24 °C</strong><span>Referencia de temperatura eficiente</span></div>
+        </div>
+
+        <div class="notice-stack">
+          <aside class="info-box">
+            <span class="box-icon" aria-hidden="true">INFO</span>
+            <p><strong>Propósito de esta guía.</strong> Este sitio es gratuito, educativo e informativo; no tiene fines comerciales. No ofrece servicios, ventas, afiliaciones ni suscripciones.</p>
+          </aside>
+          <aside class="warning-box">
+            <span class="box-icon" aria-hidden="true">!</span>
+            <p><strong>Importante:</strong> el contenido es orientativo y no reemplaza el diagnóstico ni el servicio técnico profesional. Consulta el manual del fabricante y solicita asistencia técnica calificada cuando sea necesario.</p>
+          </aside>
+        </div>
+
+        <section class="section-block" aria-labelledby="beneficios-titulo">
+          <div class="section-heading">
+            <p class="eyebrow">01 / Prevención</p>
+            <h2 id="beneficios-titulo">Por qué cuidar el equipo</h2>
+            <p>La limpieza externa segura y la revisión periódica ayudan a detectar suciedad u obstrucciones. Los resultados dependen del equipo, el entorno y las instrucciones del fabricante.</p>
+          </div>
+          <div class="grid-3">
+            <article class="card"><span class="card-icon" aria-hidden="true">01</span><h3>Flujo de aire</h3><p>Un filtro limpio y entradas despejadas facilitan el paso del aire. La frecuencia de limpieza varía según el uso y el ambiente.</p></article>
+            <article class="card"><span class="card-icon" aria-hidden="true">02</span><h3>Calidad del aire interior</h3><p>La limpieza apropiada del filtro puede reducir polvo acumulado en el equipo. No sustituye la ventilación ni garantiza la eliminación de contaminantes.</p></article>
+            <article class="card"><span class="card-icon" aria-hidden="true">03</span><h3>Detección temprana</h3><p>Observar ruidos, goteos o cambios de funcionamiento permite identificar cuándo conviene detener el equipo y consultar a personal técnico.</p></article>
+          </div>
+        </section>
+
+        <section class="section-block" aria-labelledby="equipos-titulo">
+          <div class="section-heading">
+            <p class="eyebrow">02 / Conoce tu equipo</p>
+            <h2 id="equipos-titulo">Tipos de aire acondicionado</h2>
+            <p>Split, ventana y portátil describen formatos comunes de instalación. Inverter se refiere a una tecnología de control del compresor y puede estar presente en distintos formatos.</p>
+          </div>
+          <div class="grid-4">
+            <article class="card"><p class="card-kicker">Formato · 01</p><h3>Split</h3><p>Se compone habitualmente de una unidad interior y otra exterior conectadas por líneas frigoríficas. Requiere instalación adecuada.</p></article>
+            <article class="card"><p class="card-kicker">Formato · 02</p><h3>Ventana</h3><p>Integra los componentes en una sola unidad que se instala en una abertura compatible. Revisa soporte, sellado y drenaje.</p></article>
+            <article class="card"><p class="card-kicker">Formato · 03</p><h3>Portátil</h3><p>Es una unidad móvil que suele expulsar aire caliente por un conducto hacia el exterior. Sigue las instrucciones de montaje del fabricante.</p></article>
+            <article class="card"><p class="card-kicker">Tecnología</p><h3>Inverter</h3><p>Ajusta la velocidad del compresor según la demanda. El consumo real depende del modelo, instalación, uso y condiciones ambientales.</p></article>
+          </div>
+        </section>
+
+        <section class="section-block grid-2" aria-label="Cuidados y limpieza">
+          <div>
+            <div class="section-heading">
+              <p class="eyebrow">03 / Rutina sencilla</p>
+              <h2>Consejos de cuidado</h2>
+            </div>
+            <div class="card">
+              <ul class="numbered-list">
+                <li>Revisa el filtro aproximadamente cada 30 días como referencia; adelanta la revisión si hay polvo, mascotas o uso frecuente. Atiende siempre el manual.</li>
+                <li>Mantén libres las rejillas y evita cubrir las unidades interior y exterior.</li>
+                <li>Usa una temperatura moderada. 24 °C es solo una referencia general; el confort y la eficiencia dependen del lugar y las condiciones.</li>
+                <li>Apaga el equipo si observas olor a quemado, ruidos inusuales, fuga de agua persistente o funcionamiento anormal.</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="section-heading">
+              <p class="eyebrow">04 / Limpieza segura</p>
+              <h2>Pasos básicos</h2>
+            </div>
+            <div class="card">
+              <ol class="numbered-list">
+                <li>Apaga el equipo y desconéctalo de la alimentación eléctrica antes de limpiar las partes accesibles.</li>
+                <li>Consulta el manual para retirar el filtro; no fuerces piezas ni manipules cableado.</li>
+                <li>Limpia el filtro según las instrucciones del fabricante y deja que se seque por completo antes de reinstalarlo.</li>
+                <li>Si el equipo requiere abrirse, limpiar serpentines o revisar refrigerante y componentes eléctricos, contacta personal técnico calificado.</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block" aria-labelledby="eficiencia-titulo">
+          <div class="section-heading">
+            <p class="eyebrow">05 / Uso responsable</p>
+            <h2 id="eficiencia-titulo">Recomendaciones de uso eficiente</h2>
+          </div>
+          <div class="grid-3">
+            <article class="card"><h3>Reduce ganancias de calor</h3><p>Cuando sea apropiado, usa cortinas o persianas y limita la entrada de aire caliente manteniendo puertas y ventanas cerradas durante el enfriamiento.</p></article>
+            <article class="card"><h3>Ajusta con moderación</h3><p>Evita fijar temperaturas extremas. Una diferencia menor entre el interior y el exterior puede resultar más confortable para algunas personas.</p></article>
+            <article class="card"><h3>Considera el mantenimiento</h3><p>Una revisión periódica depende del fabricante, las horas de uso y el ambiente. Seis meses es una referencia, no un intervalo universal.</p></article>
+          </div>
+        </section>
+        <div class="notice-stack section-block">
+          <aside class="responsible-box">
+            <span class="box-icon" aria-hidden="true">RESP.</span>
+            <p><strong>Responsable de este recurso:</strong> Dixon Jamelly Rolon Leal. Esta guía ofrece información general; no realiza diagnósticos ni recomienda marcas, proveedores o servicios específicos.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="sobre-nosotros" aria-labelledby="sobre-titulo">
+      <div class="container content-page">
+        <p class="eyebrow">Información del sitio</p>
+        <h1 id="sobre-titulo">Sobre Nosotros</h1>
+        <p class="page-intro">Un recurso independiente para compartir información básica y accesible sobre el cuidado doméstico de aires acondicionados.</p>
+        <div class="prose-section">
+          <h2>Origen y propósito</h2>
+          <p>Esta iniciativa educativa tiene origen en Barranquilla, Atlántico, Colombia. Su propósito es reunir orientaciones generales sobre mantenimiento preventivo, calidad del aire interior y uso responsable de equipos de climatización en el hogar.</p>
+          <p>El contenido se presenta de forma independiente, gratuita e informativa. No constituye una empresa de mantenimiento ni una oferta de productos o servicios. No realizamos ventas, afiliaciones, suscripciones ni publicidad de terceros.</p>
+        </div>
+        <div class="prose-section">
+          <h2>Alcance editorial</h2>
+          <p>La información se ofrece con intención educativa y debe contrastarse con el manual del fabricante y las condiciones particulares de cada equipo. Las tareas eléctricas, de refrigerante, instalación o reparación corresponden a personal técnico calificado.</p>
+          <p>No se garantizan ahorros, resultados técnicos ni mejoras específicas por seguir estas recomendaciones.</p>
+        </div>
+        <div class="prose-section">
+          <h2>Responsable e identificación</h2>
+          <div class="card contact-card">
+            <div class="contact-item"><span class="contact-label">Nombre completo</span><span class="contact-value">Dixon Jamelly Rolon Leal</span></div>
+            <div class="contact-item"><span class="contact-label">NIT</span><span class="contact-value">1.092.361.334-1</span></div>
+            <div class="contact-item"><span class="contact-label">Dirección física</span><span class="contact-value">Calle 35A #7C-7, Barranquilla, Atlántico, Colombia</span></div>
+            <div class="contact-item"><span class="contact-label">Ciudad y país</span><span class="contact-value">Barranquilla, Atlántico, Colombia</span></div>
+            <div class="contact-item"><span class="contact-label">Correo electrónico</span><span class="contact-value"><a href="mailto:jo141934@gmail.com">jo141934@gmail.com</a></span></div>
+            <div class="contact-item"><span class="contact-label">Teléfono</span><span class="contact-value"><a href="tel:+57315001973">3150011973</a></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="mision-vision" aria-labelledby="mision-titulo">
+      <div class="container content-page">
+        <p class="eyebrow">Principios</p>
+        <h1 id="mision-titulo">Misión y Visión</h1>
+        <p class="page-intro">Promover decisiones informadas sobre el cuidado cotidiano de la climatización doméstica, con lenguaje claro y expectativas realistas.</p>
+        <div class="grid-2">
+          <article class="card">
+            <span class="card-icon" aria-hidden="true">MIS</span>
+            <h2>Misión</h2>
+            <p>Ofrecer información educativa, gratuita e independiente que ayude a las personas a comprender prácticas básicas de mantenimiento preventivo, uso eficiente y cuidado de la calidad del aire en el hogar.</p>
+            <p>La guía fomenta la consulta de manuales y de técnicos calificados para las labores que requieren conocimientos o herramientas especializadas.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon" aria-hidden="true">VIS</span>
+            <h2>Visión</h2>
+            <p>Ser un recurso de referencia claro y responsable para aprender sobre el cuidado de equipos de aire acondicionado, la eficiencia energética en el uso cotidiano y la importancia del mantenimiento preventivo.</p>
+            <p>Buscamos contribuir a conversaciones informadas sin prometer resultados ni sustituir la evaluación profesional.</p>
+          </article>
+        </div>
+        <div class="prose-section" style="margin-top:30px">
+          <h2>Principios editoriales</h2>
+          <ul>
+            <li>Información neutral, comprensible y de carácter general.</li>
+            <li>Transparencia sobre el alcance y las limitaciones de cada recomendación.</li>
+            <li>Prioridad a la seguridad y a las instrucciones del fabricante.</li>
+            <li>Sin cobros, captura de clientes, ventas, afiliaciones ni suscripciones.</li>
+          </ul>
+        </div>
+        <div class="prose-section">
+          <h2>Responsable del sitio</h2>
+          <p>Dixon Jamelly Rolon Leal · NIT 1.092.361.334-1 · Calle 35A #7C-7, Barranquilla, Atlántico, Colombia.</p>
+          <p>Contacto: <a href="mailto:jo141934@gmail.com">jo141934@gmail.com</a> · <a href="tel:+57315001973">3150011973</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="politicas" aria-labelledby="politicas-titulo">
+      <div class="container content-page">
+        <p class="eyebrow">Transparencia y datos</p>
+        <h1 id="politicas-titulo">Políticas y Privacidad</h1>
+        <p class="page-intro">Esta política describe el tratamiento de información en este sitio educativo y los medios de contacto disponibles.</p>
+        <div class="prose-section">
+          <h2>Responsable del tratamiento</h2>
+          <p>El responsable de este sitio es Dixon Jamelly Rolon Leal, NIT 1.092.361.334-1, con domicilio en Calle 35A #7C-7, Barranquilla, Atlántico, Colombia. Correo: <a href="mailto:jo141934@gmail.com">jo141934@gmail.com</a>. Teléfono: <a href="tel:+57315001973">3150011973</a>.</p>
+        </div>
+        <div class="prose-section">
+          <h2>Datos personales y formularios</h2>
+          <p>Este sitio no recolecta ni solicita datos personales a través de formularios: no hay formularios de contacto, captura de clientes potenciales, registro de cuentas, comentarios, ventas, afiliaciones ni suscripciones. No se ofrece un servicio comercial a través de esta página.</p>
+          <p>El sitio no incorpora cookies de seguimiento comercial, publicidad de terceros, herramientas de analítica ni tecnologías propias de rastreo. La navegación del sitio no requiere crear una cuenta ni entregar datos.</p>
+          <p>Si la persona usuaria decide comunicarse por correo electrónico o teléfono mediante los enlaces publicados, los datos que incluya en esa comunicación serán tratados por el proveedor del canal y por el destinatario para atenderla; esa comunicación ocurre fuera de los formularios y sistemas de este sitio.</p>
+        </div>
+        <div class="prose-section">
+          <h2>Marco normativo y derechos</h2>
+          <p>La presente política se formula teniendo en cuenta la Ley 1581 de 2012 y su reglamentación, incluido el Decreto 1377 de 2013, compilado en el Decreto 1074 de 2015, en lo que resulte aplicable. Dado que este sitio no solicita ni almacena datos personales mediante sus propias funciones, no se crea una base de datos de usuarios a través de la navegación ordinaria.</p>
+          <p>Las consultas sobre privacidad pueden dirigirse al responsable en <a href="mailto:jo141934@gmail.com">jo141934@gmail.com</a>. Si una comunicación recibida contiene datos personales, se atenderá conforme a la normativa colombiana aplicable. La persona titular podrá solicitar información o ejercer sus derechos conforme a la ley por ese medio.</p>
+        </div>
+        <div class="prose-section">
+          <h2>Cookies y recursos externos</h2>
+          <p>El sitio no instala cookies propias de seguimiento ni integra recursos externos de publicidad, analítica o fuentes tipográficas remotas. El navegador puede procesar datos técnicos de conexión conforme a la configuración del dispositivo y a las políticas de su proveedor de acceso o alojamiento.</p>
+        </div>
+        <div class="prose-section">
+          <h2>Cambios a esta política</h2>
+          <p>Si cambia el funcionamiento del sitio o la normativa aplicable, esta política podrá actualizarse. La versión vigente estará disponible en esta sección e indicará la fecha de su última actualización.</p>
+          <p class="mono" style="font-size:12px">Última actualización: 2 de noviembre de 2026.</p>
+        </div>
+        <div class="prose-section">
+          <h2>Identificación del responsable</h2>
+          <p><strong>Dixon Jamelly Rolon Leal</strong> · NIT: 1.092.361.334-1<br>
+            Calle 35A #7C-7, Barranquilla, Atlántico, Colombia<br>
+            Correo: <a href="mailto:jo141934@gmail.com">jo141934@gmail.com</a> · Teléfono: <a href="tel:+57315001973">3150011973</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="terminos" aria-labelledby="terminos-titulo">
+      <div class="container content-page">
+        <p class="eyebrow">Condiciones de uso</p>
+        <h1 id="terminos-titulo">Términos y Condiciones</h1>
+        <p class="page-intro">Al navegar este sitio, la persona usuaria puede consultar este recurso informativo de acuerdo con las condiciones descritas a continuación.</p>
+        <div class="prose-section">
+          <h2>1. Naturaleza educativa y gratuita</h2>
+          <p>El contenido es exclusivamente educativo, informativo y gratuito. El sitio no vende productos o servicios, no recibe solicitudes de cotización, no ofrece mantenimiento, no tiene afiliaciones ni suscripciones, y no contiene publicidad de terceros.</p>
+        </div>
+        <div class="prose-section">
+          <h2>2. Alcance de la información</h2>
+          <p>Los textos presentan orientaciones generales sobre equipos domésticos. No son asesoría técnica individual, diagnóstico, instrucciones de reparación ni sustituto de la documentación del fabricante o de una evaluación profesional. Las características y necesidades varían entre modelos y condiciones de instalación.</p>
+          <p>Las referencias numéricas de frecuencia y temperatura son orientativas, no normas universales. Consulta el manual del equipo. No se garantiza ahorro energético, duración, rendimiento, calidad del aire ni ningún resultado específico.</p>
+        </div>
+        <div class="prose-section">
+          <h2>3. Seguridad y limitación de responsabilidad</h2>
+          <p>La persona usuaria es responsable de valorar si una tarea es segura y adecuada para su situación. Antes de limpiar, apaga y desconecta el equipo conforme al manual. No manipules componentes eléctricos, refrigerantes, cableado ni partes internas si no tienes la cualificación correspondiente.</p>
+          <p>En la medida permitida por la legislación colombiana, el responsable no asume responsabilidad por daños derivados de interpretar o aplicar de manera inadecuada información general, ni por interrupciones o limitaciones técnicas del acceso al sitio. Esta disposición no excluye responsabilidades que legalmente no puedan limitarse ni afecta los derechos irrenunciables de las personas consumidoras cuando sean aplicables.</p>
+        </div>
+        <div class="prose-section">
+          <h2>4. Propiedad y uso del contenido</h2>
+          <p>El contenido se ofrece para consulta personal e informativa. No se autoriza presentarlo de forma engañosa, atribuirlo a otra persona ni usarlo para sugerir respaldo comercial o técnico que el sitio no ofrece.</p>
+        </div>
+        <div class="prose-section">
+          <h2>5. Enlaces de contacto</h2>
+          <p>Los enlaces de correo y teléfono permiten a quien lo desee contactar directamente al responsable. No son formularios de captura ni solicitudes de servicio. La información compartida voluntariamente por esos canales queda sujeta al funcionamiento y las políticas de los proveedores respectivos.</p>
+        </div>
+        <div class="prose-section">
+          <h2>6. Legislación y jurisdicción</h2>
+          <p>Estos términos se interpretan conforme a las leyes de la República de Colombia. Para las controversias que legalmente puedan someterse a jurisdicción territorial, las partes se sujetan a los jueces competentes de Barranquilla, Atlántico, sin perjuicio de las normas imperativas de competencia y de protección al consumidor que resulten aplicables.</p>
+        </div>
+        <div class="prose-section">
+          <h2>7. Responsable e identificación completa</h2>
+          <p><strong>Dixon Jamelly Rolon Leal</strong><br>
+            NIT: 1.092.361.334-1<br>
+            Dirección física: Calle 35A #7C-7, Barranquilla, Atlántico, Colombia<br>
+            Ciudad y país: Barranquilla, Atlántico, Colombia<br>
+            Correo electrónico: <a href="mailto:jo141934@gmail.com">jo141934@gmail.com</a><br>
+            Teléfono: <a href="tel:+57315001973">3150011973</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-title">Guía de climatización doméstica</p>
+          <p class="footer-copy">Sitio educativo, gratuito e independiente. Sin fines comerciales: no recolecta datos personales mediante formularios, no vende productos o servicios y no usa afiliaciones, suscripciones ni publicidad de terceros.</p>
+        </div>
+        <div>
+          <p class="footer-title">Responsable del sitio</p>
+          <div class="footer-contact">
+            <span><strong>Dixon Jamelly Rolon Leal</strong></span>
+            <span>NIT: 1.092.361.334-1</span>
+            <span>Calle 35A #7C-7, Barranquilla, Atlántico, Colombia</span>
+            <span>Correo: <a href="mailto:jo141934@gmail.com">jo141934@gmail.com</a></span>
+            <span>Teléfono: <a href="tel:+57315001973">3150011973</a></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Contenido orientativo. No reemplaza el servicio técnico profesional.</span>
+        <span>© <span id="current-year">2026</span> · Recurso informativo independiente</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const sections = [...document.querySelectorAll(".page")];
+      const links = [...document.querySelectorAll(".nav-link")];
+      const nav = document.querySelector(".nav-list");
+      const menuToggle = document.querySelector(".menu-toggle");
+      const validIds = new Set(sections.map(section => section.id));
+
+      function showPage() {
+        const requestedId = window.location.hash.slice(1);
+        const id = validIds.has(requestedId) ? requestedId : "inicio";
+        sections.forEach(section => {
+          const active = section.id === id;
+          section.classList.toggle("active", active);
+          section.setAttribute("aria-hidden", String(!active));
+        });
+        links.forEach(link => {
+          if (link.hash === `#${id}`) link.setAttribute("aria-current", "page");
+          else link.removeAttribute("aria-current");
+        });
+        nav.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menú");
+        window.scrollTo(0, 0);
+      }
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = nav.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+      });
+      window.addEventListener("hashchange", showPage);
+      showPage();
+      document.getElementById("current-year").textContent = String(new Date().getFullYear());
+    })();
+  </script>
+</body>
+</html>
